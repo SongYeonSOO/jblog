@@ -32,15 +32,11 @@
 					<p>
 				</div>
 				<ul class="blog-list">
-					<li><a href="">Spring Camp 2016 참여기</a> <span>2015/05/02</span>
+				
+				<c:forEach items="${plist}" var="pvo">
+					<li><a href="/jblog/blog/${blogId}?no=${pvo.post_no}">${pvo.title}</a> <span>${pvo.reg_date}</span>
 					</li>
-					<li><a href="">Spring Boot 사용법 정리</a> <span>2015/05/02</span>
-					</li>
-					<li><a href="">Spring Security 설정법</a> <span>2015/05/02</span>
-					</li>
-					<li><a href="">JPA + Hinernate</a> <span>2015/05/02</span></li>
-					<li><a href="">AOP 활용하기 - DAO 실행시간 측정하기</a> <span>2015/05/02</span>
-					</li>
+				</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -48,17 +44,19 @@
 		<div id="extra">
 			<div class="blog-logo">
 				<img
-					src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					src="${bvo.logo}" alt="로고를 삽입해주세요">
+<!-- 					"${pageContext.request.contextPath}/assets/images/spring-logo.jpg">  -->
 			</div>
 		</div>
 
 		<div id="navigation">
 			<h2>카테고리</h2>
 			<ul>
-				<li><a href="">닥치고 스프링</a></li>
-				<li><a href="">스프링 스터디</a></li>
-				<li><a href="">스프링 프로젝트</a></li>
-				<li><a href="">기타</a></li>
+			
+			<!--  default가 미분류 -->
+			<c:forEach items="${category}" var="cvo">
+			<li><a href="/jblog/blog/${blogId}/${cvo.category_no}">${cvo.name}</a></li>
+			</c:forEach>
 			</ul>
 		</div>
 

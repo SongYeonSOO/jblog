@@ -1,5 +1,8 @@
 package com.estsoft.jblog.interceptor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,17 +30,22 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			// @Auth가 없는 컨트롤러 핸들러
 			// 접근제어가 필요없음
 			if(auth == null){
+				
 				return true;
 			}
+			Map<String, Object> map = new HashMap<String, Object>();
 			
 			HttpSession session = request.getSession();
 			if(session == null){
-				response.sendRedirect(request.getContextPath()+"/user/loginform");
+				//response.sendRedirect(request.getContextPath()+"/user/loginform");
 				return false;
 			}
+			
 			UserVo authUser =(UserVo)session.getAttribute("authUser");
 			if(authUser == null){
-				response.sendRedirect(request.getContextPath()+"/user/loginform");
+			
+		
+				//	response.sendRedirect(request.getContextPath()+"/user/loginform");
 			}
 			
 				return true;

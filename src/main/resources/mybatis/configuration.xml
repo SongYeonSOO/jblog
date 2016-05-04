@@ -5,9 +5,15 @@
 
 		<!-- guestbook.xml의 resultType -->
 		<typeAlias type="com.estsoft.jblog.vo.UserVo" alias="uservo" />
+		<typeAlias type="com.estsoft.jblog.vo.BlogVo" alias="blogvo" />
+		<typeAlias type="com.estsoft.jblog.vo.CategoryVo" alias="categoryvo" />
+		<typeAlias type="com.estsoft.jblog.vo.PostVo" alias="postvo" />
 	</typeAliases>
 	<mappers>
 		<!-- sql같은 경우에는 file 하나에 해결할 수 있지만, user/guestbook등으로 나누면 섞이지 않아서 좋겠지? -->
 		<mapper resource="mybatis/mappers/user.xml"></mapper>
+		<mapper resource="mybatis/mappers/blog.xml"></mapper>
+		<mapper resource="mybatis/mappers/category.xml"></mapper>
+		<mapper resource="mybatis/mappers/post.xml"></mapper>
 	</mappers>
 </configuration>

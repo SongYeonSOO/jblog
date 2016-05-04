@@ -9,7 +9,7 @@
 
 <div id="menu">
 	<h1 class="logo">
-		<a href="/jblog/main">JBlog</a>
+		<a href="/jblog/main" id="main-logo"><span>JBlog</span></a>
 	</h1>
 	<ul class="menu">
 		<c:choose>

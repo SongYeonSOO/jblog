@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.estsoft.jblog.service.BlogService;
 import com.estsoft.jblog.service.UserService;
 import com.estsoft.jblog.vo.UserVo;
 
@@ -24,6 +25,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+/*	@Autowired
+	private BlogService blogService; 고민중 */
 
 	@RequestMapping("/join")
 	public String joinform() {
@@ -40,7 +43,7 @@ public class UserController {
 			return "/user/join";
 		}
 		userService.join(vo);
-
+		
 		return "redirect:/user/joinsuccess";
 
 	}

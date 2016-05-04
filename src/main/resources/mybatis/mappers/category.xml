@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="category">
+	<!-- input : id, name, passwd, reg_date -->
+	<insert id="insert" parameterType="categoryvo">
+	<![CDATA[
+	INSERT INTO category VALUES(null, #{no}, #{name}, #{description}, now(), #{post_count} )
+	]]>
+	</insert>
+		<select id="getlist" resultType="categoryvo">
+	<![CDATA[
+	SELECT category_no, no, name, description,DATE_FORMAT(reg_date, '%Y-%m-%d %h:%i:%s') AS reg_date, post_count FROM category
+	]]>
+	</select>
+</mapper>
+
