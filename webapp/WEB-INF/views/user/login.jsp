@@ -53,7 +53,7 @@
 						//email칸 비우고 다시 입력할 수 있도록
 						$("#id").val("").focus();
 						$("#passwd").val("").focus();
-						return;
+						return false;
 					}
 
 					window.location.replace("/jblog/main");

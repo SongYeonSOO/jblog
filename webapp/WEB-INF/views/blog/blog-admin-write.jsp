@@ -19,11 +19,11 @@
 		<div id="wrapper">
 			<div id="content" class="full-screen">
 				<ul class="admin-menu">
-					<li><a href="">기본설정</a></li>
-					<li><a href="">카테고리</a></li>
+					<li><a href="/jblog/blog/${blogId}/blog-admin-basic">기본설정</a></li>
+					<li><a href="/jblog/blog/${blogId}/blog-admin-category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="/jblog/blog/blog-admin-writing" method="post">
+				<form action="/jblog/blog/${blogId}/blog-admin-writing" method="post">
 					<table class="admin-cat-write">
 						<tr>
 							<td class="t">제목</td>

@@ -8,7 +8,7 @@
 	pageEncoding="UTF-8"%>
 
 <div id="header">
-	<h1>${bvo.title}</h1>
+	<h1><a href="/jblog/blog/${blogId}" id="main-logo">${bvo.title}</a></h1>
 	<ul>
 		<c:choose>
 			<c:when test="${empty authUser}">

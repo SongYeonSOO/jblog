@@ -33,4 +33,5 @@ public class PostDao {
 		sqlSession.insert("post.insert", pvo);
 
 	}
+	
 }

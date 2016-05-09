@@ -5,7 +5,7 @@
 	
 	<select id="searchPost" parameterType="categoryvo" resultType="postvo">
 	<![CDATA[
-	SELECT post_no, category_no, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d %h:%i:%s') AS reg_date FROM post WHERE category_no=#{category_no}
+	SELECT post_no, category_no, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d %h:%i:%s') AS reg_date FROM post WHERE category_no=#{category_no} ORDER BY reg_date DESC
 	]]>
 	</select>
 	

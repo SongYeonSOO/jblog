@@ -35,9 +35,15 @@ public class BlogDao {
 		// return vo.getNo();
 
 	}
-	public BlogVo getOneBlog(UserVo vo){
-		BlogVo bvo = sqlSession.selectOne("blog.getoneblog",vo.getId());
+
+	public BlogVo getOneBlog(UserVo vo) {
+		BlogVo bvo = sqlSession.selectOne("blog.getoneblog", vo.getId());
 		return bvo;
+	}
+
+	public void UpdateBlog(BlogVo bvo) {
+		
+		sqlSession.update("blog.updateblog", bvo);
 	}
 
 }
