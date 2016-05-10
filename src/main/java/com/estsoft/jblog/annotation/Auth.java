@@ -8,9 +8,10 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Auth {
-	
-	//default 값 확인
+
+	// default 값 확인
 	String value() default "user";
+
 	boolean required = true;
 
 }

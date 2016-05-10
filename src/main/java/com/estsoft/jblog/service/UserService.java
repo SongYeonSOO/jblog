@@ -11,34 +11,35 @@ import com.estsoft.jblog.vo.UserVo;
 
 @Service
 public class UserService {
-	public UserService(){
-		
+	public UserService() {
+
 	}
+
 	@Autowired
 	UserDao udao;
 	@Autowired
 	BlogDao bdao;
 	@Autowired
 	CategoryDao cdao;
-	public void join(UserVo vo){
+
+	public void join(UserVo vo) {
 		udao.insert(vo);
 		bdao.insert(vo);
-		BlogVo bvo =bdao.getOneBlog(vo);
+		BlogVo bvo = bdao.getOneBlog(vo);
 		cdao.insert(bvo);
 	}
-	
-	
-	public UserVo getUser(String id){
-		
+
+	public UserVo getUser(String id) {
+
 		UserVo vo = udao.getUser(id);
-		
-	return vo;
+
+		return vo;
 	}
-	
-	public UserVo login(String id,String passwd){
-		
+
+	public UserVo login(String id, String passwd) {
+
 		UserVo vo = udao.get(id, passwd);
-		
-	return vo;
+
+		return vo;
 	}
 }

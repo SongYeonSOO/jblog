@@ -1,9 +1,5 @@
 package com.estsoft.jblog.dao;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -30,7 +26,8 @@ public class BlogDao {
 		bvo.setLogo("modify your logo");
 		bvo.setTitle("modify your blog title");
 		bvo.setId(vo.getId());
-		int count = sqlSession.insert("blog.insert", bvo);
+		sqlSession.insert("blog.insert", bvo);
+
 		// 원래 return no해야함 지금은 test용
 		// return vo.getNo();
 
@@ -42,7 +39,7 @@ public class BlogDao {
 	}
 
 	public void UpdateBlog(BlogVo bvo) {
-		
+
 		sqlSession.update("blog.updateblog", bvo);
 	}
 

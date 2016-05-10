@@ -86,8 +86,6 @@ public class BlogController {
 			plist = null;
 		}
 		model.addAttribute("plist", plist);
-		System.out.println(plist);
-		System.out.println("no" + no);
 
 		// postView
 		PostVo onepvo = null;
@@ -95,7 +93,6 @@ public class BlogController {
 			onepvo = plist.get(0);
 		} else if (no != -1) {
 			onepvo = postService.SearchOnePost(no);
-			System.out.println(onepvo);
 		}
 
 		model.addAttribute("no", no);
@@ -226,10 +223,9 @@ public class BlogController {
 		cvo.setNo(bvo.getNo());
 		cvo.setPost_count(0L);
 		categoryService.insertCate(cvo);
-		
-		List<CategoryVo>clist=categoryService.SearchCategory(blogId);
-		cvo = clist.get(clist.size()-1);
-		System.out.println("oooooooooo222222222222222o"+cvo.getCategory_no());
+
+		List<CategoryVo> clist = categoryService.SearchCategory(blogId);
+		cvo = clist.get(clist.size() - 1);
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", cvo);
 		map.put("result", "success");
@@ -242,7 +238,6 @@ public class BlogController {
 	public Map<String, Object> CategoryDelete(@PathVariable("category_no") Long category_no,
 			@PathVariable("blogId") String blogId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("ooooooooooo"+category_no);
 		categoryService.deleteCate(category_no);
 
 		Map<String, Object> map = new HashMap<String, Object>();

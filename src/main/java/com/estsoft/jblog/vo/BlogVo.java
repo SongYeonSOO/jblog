@@ -1,10 +1,10 @@
 package com.estsoft.jblog.vo;
 
 public class BlogVo {
-	private Long no;		// 블로그번호
-	private String title;	//블로그 이름
-	private String logo;	// 로고 위치
-	private String id;	// 회원id
+	private Long no; // 블로그번호
+	private String title; // 블로그 이름
+	private String logo; // 로고 위치
+	private String id; // 회원id
 
 	public Long getNo() {
 		return no;

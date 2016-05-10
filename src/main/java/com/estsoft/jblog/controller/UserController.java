@@ -25,8 +25,9 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-/*	@Autowired
-	private BlogService blogService; 고민중 */
+	/*
+	 * @Autowired private BlogService blogService; 고민중
+	 */
 
 	@RequestMapping("/join")
 	public String joinform() {
@@ -43,7 +44,7 @@ public class UserController {
 			return "/user/join";
 		}
 		userService.join(vo);
-		
+
 		return "redirect:/user/joinsuccess";
 
 	}
@@ -59,7 +60,6 @@ public class UserController {
 	public String login() {
 		return "user/login";
 	}
-	
 
 	@RequestMapping("/checkid")
 	@ResponseBody

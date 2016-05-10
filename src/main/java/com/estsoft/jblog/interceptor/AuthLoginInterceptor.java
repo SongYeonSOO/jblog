@@ -25,18 +25,18 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
 
-		//login service 호출(login 작업)
-		UserVo authUser = userService.login(id,passwd);
+		// login service 호출(login 작업)
+		UserVo authUser = userService.login(id, passwd);
 		JSONObject json = new JSONObject();
 
-		if(authUser == null){
-			
+		if (authUser == null) {
+
 			json.put("result", "success");
-			json.put("data", false);			
+			json.put("data", false);
 			response.setContentType("application/json; charset=utf-8");
 			response.getWriter().print(json.toString());
 
-			//의미상 끝났지만 그래도 false를 return 써주시오
+			// 의미상 끝났지만 그래도 false를 return 써주시오
 			return false;
 		}
 
@@ -44,11 +44,11 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		session.setAttribute("authUser", authUser);
 
 		json.put("result", "success");
-		json.put("data", true);			
+		json.put("data", true);
 		response.setContentType("application/json; charset=utf-8");
 		response.getWriter().print(json.toString());
-		
+
 		return false;
-		
+
 	}
 }

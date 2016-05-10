@@ -15,7 +15,6 @@
 <script type="text/javascript">
 var count=1;
 var renderHtml = function( cvo ) {
-	console.log(cvo);
 	// 대신에 js template Library를 사용한다. ex) EJS, Underscore.js
 	var html = "<tr id=tr-"+ cvo.category_no + ">" +
 					"<td>" + count + " </td>" +
@@ -30,11 +29,9 @@ var renderHtml = function( cvo ) {
 	if ( cvo.post_count > 0 || cvo.name == '미분류') {
 		$("#delImage-"+ cvo.category_no).hide();
 	}
-	console.log( $("#delImage-"+ cvo.category_no).attr("data-no") );
 	count ++;
 	$("#delImage-"+ cvo.category_no).css("cursor", "pointer");
 	$("#delImage-"+ cvo.category_no).click(function(){		
-		console.log("clicked");
 	$.ajax({
 
 		//ajax가 js가 참조할 수 있는 객체로 만들어줌! 
@@ -53,7 +50,6 @@ var renderHtml = function( cvo ) {
 			}
 
 			if (response.data == false) {
-				console.log("success:data false");
 				alert("삭제실패!");
 
 

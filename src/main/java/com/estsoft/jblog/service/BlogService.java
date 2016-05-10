@@ -15,7 +15,7 @@ import com.estsoft.jblog.vo.UserVo;
 
 @Service
 public class BlogService {
-	
+
 	@Autowired
 	BlogDao bdao;
 	@Autowired
@@ -26,12 +26,14 @@ public class BlogService {
 	public BlogService() {
 
 	}
+
 	public BlogVo Blog(String id) {
 		UserVo vo = new UserVo();
 		vo.setId(id);
-		
+
 		return bdao.getOneBlog(vo);
 	}
+
 	public List<PostVo> SearchPost(CategoryVo cvo) {
 		return pdao.SearchPost(cvo);
 	}
@@ -45,23 +47,27 @@ public class BlogService {
 
 		return cdao.SearchCategory(blogId);
 	}
-	
+
 	public void insertCate(CategoryVo cvo) {
-		
+
 		cdao.insertCate(cvo);
 
 	}
-	public void deleteCate(Long category_no){
+
+	public void deleteCate(Long category_no) {
 		cdao.deleteCate(category_no);
 	}
+
 	public void countUpdate(Long category_no) {
 		cdao.countUpdate(category_no);
-		
+
 	}
+
 	public void UpdateBlog(BlogVo bvo) {
 		bdao.UpdateBlog(bvo);
-		
+
 	}
+
 	public PostVo SearchOnePost(Long post_no) {
 		PostVo pvo = pdao.SearchOnePost(post_no);
 		return pvo;

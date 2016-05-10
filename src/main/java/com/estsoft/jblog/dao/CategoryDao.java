@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.estsoft.jblog.vo.BlogVo;
 import com.estsoft.jblog.vo.CategoryVo;
 
-
 @Repository
 public class CategoryDao {
 	@Autowired
@@ -31,20 +30,20 @@ public class CategoryDao {
 		cvo.setNo(vo.getNo());
 		cvo.setName("미분류");
 		cvo.setDescription("카테고리를 지정하지 않은 경우");
-		int count = sqlSession.insert("category.insert", cvo);
-		// 원래 return no해야함 지금은 test용
-		// return vo.getNo();
+		sqlSession.insert("category.insert", cvo);
 
 	}
 
 	public List<CategoryVo> SearchCategory(String id) {
-		return sqlSession.selectList("category.getlist",id);
+		return sqlSession.selectList("category.getlist", id);
 	}
+
 	public void insertCate(CategoryVo cvo) {
 		sqlSession.insert("category.insert", cvo);
 
 	}
-	public void deleteCate(Long category_no){
+
+	public void deleteCate(Long category_no) {
 		sqlSession.delete("category.delete", category_no);
 	}
 

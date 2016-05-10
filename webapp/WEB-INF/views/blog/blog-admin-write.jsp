@@ -24,7 +24,6 @@ $("#writing").submit(function(){
 	}
 	//2. 내용 유효성 체크
 	var conename = $("#textcontent").val();
-	console.log(conename);
 	if (conename == "") {
 		alert("내용 없다!");
 		$("#textcontent").val("").focus();

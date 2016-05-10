@@ -13,41 +13,42 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.estsoft.jblog.annotation.AuthUser;
 import com.estsoft.jblog.vo.UserVo;
 
-public class AuthUserHandlerMethodArgumentResolver implements  HandlerMethodArgumentResolver {
+public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
-
-	//@AuthUser뿐만 아니라 모든 parameter가 다 넘어온다.
+	// @AuthUser뿐만 아니라 모든 parameter가 다 넘어온다.
 	public boolean supportsParameter(MethodParameter parameter) {
-	
-		//check @AuthUser annotation
-		//parameter조건 확인
+
+		// check @AuthUser annotation
+		// parameter조건 확인
 		AuthUser authUser = parameter.getParameterAnnotation(AuthUser.class);
-		if(authUser == null){
+		if (authUser == null) {
 			return false;
 		}
-		
-		//check parameter type
-	//왼쪽이 객체가 아니니까 instanceof가 아님
-		if(parameter.getParameterType().equals(UserVo.class)==false){return false;}
+
+		// check parameter type
+		// 왼쪽이 객체가 아니니까 instanceof가 아님
+		if (parameter.getParameterType().equals(UserVo.class) == false) {
+			return false;
+		}
 		return true;
 
 	}
 
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer arg1, NativeWebRequest webRequest,
 			WebDataBinderFactory arg3) throws Exception {
-	
-		if(supportsParameter(parameter) == false){
+
+		if (supportsParameter(parameter) == false) {
 			return WebArgumentResolver.UNRESOLVED;
 		}
-		//session에서 authUser 가져오기
-		//nativeWebRequest에 HTTPServletRequest의 정보들이 들어있을 것임 -> request 필요
+		// session에서 authUser 가져오기
+		// nativeWebRequest에 HTTPServletRequest의 정보들이 들어있을 것임 -> request 필요
 		HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
 		HttpSession session = request.getSession();
-		if(session == null){
+		if (session == null) {
 			return WebArgumentResolver.UNRESOLVED;
 		}
-		
-		return session.getAttribute("authUser");		
+
+		return session.getAttribute("authUser");
 	}
 
 }

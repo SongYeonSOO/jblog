@@ -75,8 +75,7 @@
 				return false;
 			}
 
-			console.log(id); // id이 나온다는 것은 비어있지않다는 것
-			$.ajax({
+				$.ajax({
 				//ajax가 js가 참조할 수 있는 객체로 만들어줌! 
 
 				url : "/jblog/user/checkid?id=" + id, //요청 url
@@ -89,8 +88,7 @@
 				//data: "{"a":"checkid",id:"kickscar@gmail.com"}""
 				// 성공 시 call-back
 				success : function(response) {
-					console.log(response.result + ":" + response.data);
-
+				
 					if (response.result != "success") {
 						return;
 					}

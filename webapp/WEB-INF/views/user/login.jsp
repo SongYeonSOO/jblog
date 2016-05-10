@@ -47,7 +47,6 @@
 					}
 
 					if (response.data == false) {
-						console.log("success:odata false");
 						alert("아이디와 비밀번호가 일치하지 않습니다.");
 
 						//email칸 비우고 다시 입력할 수 있도록
@@ -56,7 +55,6 @@
 
 						return;
 					}
-					console.log("succ&true");
 					window.location.replace("/jblog/main");
 
 				},
