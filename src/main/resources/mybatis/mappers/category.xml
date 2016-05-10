@@ -24,5 +24,11 @@
 	UPDATE category SET post_count=post_count+1 WHERE category_no=#{category_no}
 	]]>
 	</update>
+	
+		<update id="countDownUpdate" parameterType="long">
+	<![CDATA[
+	UPDATE category SET post_count=post_count-1 WHERE category_no=#{category_no}
+	]]>
+	</update>
 </mapper>
 

@@ -75,7 +75,6 @@ public class BlogController {
 		// category list
 		List<CategoryVo> clist = blogService.SearchCategory(blogId);
 		model.addAttribute("category", clist);
-
 		BlogVo bvo = blogService.Blog(blogId);
 		model.addAttribute("bvo", bvo);
 		// post list
@@ -267,6 +266,19 @@ public class BlogController {
 		categoryService.countUpdate(vo.getCategory_no());
 
 		return "redirect:/blog/" + blogId;
+	}
+
+	@Auth
+	@RequestMapping("/{blogId}/post-delete/{post_no}")
+	// @AuthUser로 받는 parameter는 반드시 인증된 사용자가 넘어오게된다
+	public String deletePost(@ModelAttribute PostVo pvo, @PathVariable("blogId") String blogId,
+			@PathVariable("post_no") Long post_no) {
+		pvo = postService.SearchOnePost(post_no);
+		postService.deletePost(pvo.getPost_no());
+		System.out.println("pvo.getCategory_no()"+pvo.getCategory_no());
+		categoryService.countdownUpdate(pvo.getCategory_no());
+
+		return "redirect:/blog/" + blogId+"/"+pvo.getCategory_no();
 	}
 
 }

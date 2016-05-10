@@ -32,23 +32,28 @@
 			<div id="content">
 				<div class="blog-content">
 					<c:choose>
-
 					<c:when test="${not empty onepvo}">
 							<h4>${onepvo.title}</h4>
 							<h5> 작성일: ${onepvo.reg_date}</h5>
-							<!-- 우측정렬필요 -->
 							<p>${onepvo.content}</p>
+							<div id="deletediv">
+							<c:if test="${not empty authUser && authUser.id == blogId}">
+							<a href="/jblog/blog/${blogId}/post-delete/${onepvo.post_no}"><img src="${pageContext.request.contextPath}/assets/images/delete.png"></a>
+							</c:if>
+							</div>
 					</c:when>
 					<c:when test="${empty plist}">
 							<h4>내용이 없습니다</h4>											
 					</c:when>
 					</c:choose>
 				</div>
+
 				<ul class="blog-list">
 
 					<c:forEach items="${plist}" var="pvo">
 						<li><a href="/jblog/blog/${blogId}/${category_no}?no=${pvo.post_no}">${pvo.title}</a>
 							<span>${pvo.reg_date}</span></li>
+							
 					</c:forEach>
 				</ul>
 			</div>

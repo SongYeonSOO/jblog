@@ -48,7 +48,10 @@ public class CategoryDao {
 	}
 
 	public void countUpdate(Long category_no) {
-
-		sqlSession.delete("category.countUpdate", category_no);
+		
+		sqlSession.update("category.countUpdate", category_no);
+	}
+	public void countDownUpdate(Long category_no) {
+		sqlSession.update("category.countDownUpdate", category_no);
 	}
 }

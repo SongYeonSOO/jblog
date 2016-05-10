@@ -63,6 +63,11 @@ public class BlogService {
 
 	}
 
+	public void countdownUpdate(Long category_no) {
+		cdao.countDownUpdate(category_no);
+		
+	}
+	
 	public void UpdateBlog(BlogVo bvo) {
 		bdao.UpdateBlog(bvo);
 
@@ -72,4 +77,10 @@ public class BlogService {
 		PostVo pvo = pdao.SearchOnePost(post_no);
 		return pvo;
 	}
+
+	public void deletePost(Long post_no) {
+		pdao.deletePost(post_no);
+		
+	}
+
 }

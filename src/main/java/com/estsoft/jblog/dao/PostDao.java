@@ -39,4 +39,9 @@ public class PostDao {
 		return pvo;
 	}
 
+	public void deletePost(Long post_no) {
+		sqlSession.delete("post.deletepost", post_no);
+		
+	}
+
 }

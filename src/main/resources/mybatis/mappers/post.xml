@@ -18,4 +18,10 @@
 	SELECT post_no, category_no, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d %h:%i:%s') AS reg_date FROM post WHERE post_no=#{post_no}
 	]]>
 	</select>
+	<delete id="deletepost" parameterType="long">
+	<![CDATA[
+	DELETE FROM post WHERE post_no=#{post_no}
+	]]>
+	</delete>
+	
 </mapper>
