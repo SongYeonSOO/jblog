@@ -28,8 +28,8 @@
 		</c:import>
 		<form class="search-form">
 			<fieldset>
-				<input type="text" name="keyword" /> <input type="submit"
-					value="검색" />
+				<input type="text" name="keyword" value="검색기능은 안됩니다." /> 
+				<input type="submit" value="검색" />
 			</fieldset>
 			<fieldset>
 				<input type="radio" name="which" value="blog-title"> <label>블로그
@@ -48,37 +48,6 @@
 						</tr>
 					</c:forEach>
 				</table>
-
-				<!-- page 출력 (Not now)-->
-				<%-- 				<div class="pager">
-					<ul>
-						<c:if test="${pageinfo.currentpage > 5}">
-							<li><a
-								href="/jblog/blog-main?page=${pageinfo.beginpage-1}&kwd=${kwd}">◀</a></li>
-						</c:if>
-						<c:forEach begin="${pageinfo.beginpage}" end="${pageinfo.maxpage}"
-							var="viewpage">
-							<c:choose>
-								<c:when test="${viewpage==pageinfo.currentpage}">
-									<li class="selected"><a
-										href="/jblog/blog/blog-main?page=${viewpage}&kwd=${kwd}">${viewpage}</a></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="/jblog/blog/blog-main?page=${viewpage}&kwd=${kwd}">${viewpage}</a></li>
-								</c:otherwise>
-							</c:choose>
-
-						</c:forEach>
-						<c:if test="${pageinfo.totalpage != pageinfo.maxpage}">
-							<li><a
-								href="/jblog/blog/blog-main?page=${pageinfo.maxpage+1}&kwd=${kwd}">▶</a></li>
-						</c:if>
-
-					</ul>
-				</div>
-
- --%>
-
 			</fieldset>
 		</form>
 	</div>

@@ -33,5 +33,10 @@ public class PostDao {
 		sqlSession.insert("post.insert", pvo);
 
 	}
+
+	public PostVo SearchOnePost(Long post_no) {
+		PostVo pvo = sqlSession.selectOne("post.searchOnePost", post_no);		
+		return pvo;
+	}
 	
 }

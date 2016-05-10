@@ -32,22 +32,22 @@
 			<div id="content">
 				<div class="blog-content">
 					<c:choose>
-						<c:when test="${empty plist}">
-							<h4>내용이 없습니다</h4>
-						</c:when>
-						<c:otherwise>
-							<h4>${plist.get(0).title}</h4>
-							<h5>${plist.get(0).reg_date}</h5>
-							<!-- 우측정렬필요 -->
-							<p>${plist.get(0).content}</p>
 
-						</c:otherwise>
+					<c:when test="${not empty onepvo}">
+							<h4>${onepvo.title}</h4>
+							<h5>${onepvo.reg_date}</h5>
+							<!-- 우측정렬필요 -->
+							<p>${onepvo.content}</p>
+					</c:when>
+					<c:when test="${empty plist}">
+							<h4>내용이 없습니다</h4>											
+					</c:when>
 					</c:choose>
 				</div>
 				<ul class="blog-list">
 
 					<c:forEach items="${plist}" var="pvo">
-						<li><a href="/jblog/blog/${blogId}?no=${pvo.post_no}">${pvo.title}</a>
+						<li><a href="/jblog/blog/${blogId}/${category_no}?no=${pvo.post_no}">${pvo.title}</a>
 							<span>${pvo.reg_date}</span></li>
 					</c:forEach>
 				</ul>
@@ -68,7 +68,7 @@
 				<!--  default가 미분류 -->
 				<c:forEach items="${category}" var="cvo">
 					<c:choose>
-						<c:when test="${cvo.category_no==category_no}">
+					<c:when test="${cvo.category_no==category_no}">
 							<li><a href="/jblog/blog/${blogId}/${cvo.category_no}"><strong>${cvo.name}</strong></a></li>
 						</c:when>
 						<c:otherwise>

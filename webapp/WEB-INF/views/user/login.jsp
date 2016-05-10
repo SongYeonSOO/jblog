@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	$(function() {
 		//ajax ; 나중에 하자
-		$("#login-form").submit(function() {
+		$("#login-image").click(function() {
 			var id = $("#id").val();
 			var passwd = $("#passwd").val();
 
@@ -29,7 +29,7 @@
 				$("#passwd").val("").focus();
 				return false;
 			}
-
+			
 			$.ajax({
 				//ajax가 js가 참조할 수 있는 객체로 만들어줌! 
 
@@ -51,13 +51,14 @@
 						alert("아이디와 비밀번호가 일치하지 않습니다.");
 
 						//email칸 비우고 다시 입력할 수 있도록
-						$("#id").val("").focus();
-						$("#passwd").val("").focus();
-						return false;
-					}
+ 						$("#id").val("").focus();
+						$("#passwd").val("").focus(); 
 
+						return;
+					}
+					console.log("succ&true");
 					window.location.replace("/jblog/main");
-					
+
 				},
 				// 실패시 call-back
 				error : function(jqXHR, status, error) {
@@ -67,7 +68,6 @@
 				}
 
 			});
-			
 		});
 
 	});
@@ -79,12 +79,11 @@
 			<c:param name="menu" value="" />
 		</c:import>
 
-		<form class="login-form" id="login-form" name="login-form"
-			method="post" action="/jblog/user/login">
+		<form class="login-form" id="login-form" name="login-form">
 			<label>아이디</label> <input type="text" name="id" id="id"> <label>패스워드</label>
-			<input type="text" name="passwd" id="passwd"> <input
-				type="submit" id="login-button" value="로그인">
-		</form>
+			<input type="text" name="passwd" id="passwd">
+			<input type="submit" id="login-button" value="로그인" style="display:none"><img id="login-image" src="${pageContext.request.contextPath}/assets/images/login.png">
+		</form>				
 	</div>
 </body>
 </html>

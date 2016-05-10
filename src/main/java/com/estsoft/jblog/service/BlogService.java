@@ -61,4 +61,8 @@ public class BlogService {
 		bdao.UpdateBlog(bvo);
 		
 	}
+	public PostVo SearchOnePost(Long post_no) {
+		PostVo pvo = pdao.SearchOnePost(post_no);
+		return pvo;
+	}
 }

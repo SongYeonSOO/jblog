@@ -9,8 +9,13 @@
 	]]>
 	</select>
 	
-		<select id="insert" parameterType="postvo">
+		<insert id="insert" parameterType="postvo">
 	<![CDATA[
 	INSERT INTO post VALUES(null, #{category_no}, #{title}, #{content}, now())]]>
+	</insert>
+	<select id="searchOnePost" parameterType="long" resultType="postVo">
+	<![CDATA[
+	SELECT post_no, category_no, title, content, DATE_FORMAT(reg_date, '%Y-%m-%d %h:%i:%s') AS reg_date FROM post WHERE post_no=#{post_no}
+	]]>
 	</select>
 </mapper>

@@ -16,9 +16,10 @@
 </script>
 <script type="text/javascript">
 	$(function() {
+		$("#img-checkid0").show();
 		//ajax ; 나중에 하자
-		$("#join-form").submit(function() {
-
+		$("#join-submit").click(function() {
+			
 			//submit해도 무시당함  return false;
 			//return true; 일때만 가능
 
@@ -58,16 +59,20 @@
 				alert("약관 동의!!!!!!!!!!");
 				return false;
 			}
-		});
+	 		$("#join-form").submit();
+	 	});
+		
 		$("#blog-id").change(function() {
-			$("#btn-checkid").show();
+			$("#img-checkid0").show();
 			$("#img-checkid").hide();
 
 		});
-		$("#btn-checkid").click(function() {
-			var id = $("#id").val(); // value가 아니라 val이라는 ftn
+		$("#img-checkid0").click(function() {
+			var id = $("#blog-id").val(); // value가 아니라 val이라는 ftn
 			if (id == "") {
-				return;
+				alert("id 없다!");
+				$("#blog-id").val("").focus();
+				return false;
 			}
 
 			console.log(id); // id이 나온다는 것은 비어있지않다는 것
@@ -94,13 +99,13 @@
 						alert("이미 존재하는 이메일 다른 거");
 
 						//id칸 비우고 다시 입력할 수 있도록
-						$("#id").val("").focus();
-						return;
+						$("#blog-id").val("").focus();
+						return false;
 					}
 
 					//사용가능한 이메일
 					//api 함수의 특정 api를 보이는 것은 show를 이용함
-					$("#btn-checkid").hide();
+					$("#img-checkid0").hide();
 					$("#img-checkid").show();
 				},
 				// 실패시 call-back
@@ -124,10 +129,13 @@
 			<label class="block-label" for="name">이름</label> <input id="name"
 				name="name" type="text" value=""> <label class="block-label"
 				for="blog-id">아이디</label> <input id="blog-id" name="id" type="text">
-			<input id="btn-checkid" type="button" value="id 중복체크"> <img
+			<input id="btn-checkid" type="button" value="id 중복체크" style="display: none;"> 
+			<img
+				id="img-checkid0" style="display: none;"
+				src="${pageContext.request.contextPath}/assets/images/checking.png">
+			<img
 				id="img-checkid" style="display: none;"
 				src="${pageContext.request.contextPath}/assets/images/check.png">
-
 			<label class="block-label" for="passwd">패스워드</label> <input
 				id="passwd" name="passwd" type="password" />
 
@@ -137,9 +145,11 @@
 				<label class="l-float">서비스 약관에 동의합니다.</label>
 			</fieldset>
 
-			<input type="submit" value="가입하기">
+			<input id="join-submit0" type="submit" value="가입하기" style="display: none"><img
+				id="join-submit"
+				src="${pageContext.request.contextPath}/assets/images/signup.png">
 
 		</form>
-	</div>
+	</div> 
 </body>
 </html>
