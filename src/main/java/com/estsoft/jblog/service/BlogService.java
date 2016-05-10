@@ -47,6 +47,7 @@ public class BlogService {
 	}
 	
 	public void insertCate(CategoryVo cvo) {
+		
 		cdao.insertCate(cvo);
 
 	}

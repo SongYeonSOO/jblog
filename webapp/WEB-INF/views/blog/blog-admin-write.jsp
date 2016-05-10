@@ -10,6 +10,31 @@
 <title>JBlog</title>
 <Link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/jblog.css">
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+$(function(){
+$("#writing").submit(function(){
+	//1. 제목 유효성 체크
+	var catename = $("#title").val();
+	if (catename == "") {
+		alert("제목 없다!");
+		$("#title").val("").focus();
+		return false;
+	}
+	//2. 내용 유효성 체크
+	var conename = $("#textcontent").val();
+	console.log(conename);
+	if (conename == "") {
+		alert("내용 없다!");
+		$("#textcontent").val("").focus();
+		return false;
+	}
+	return true;
+	});
+	
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -23,11 +48,11 @@
 					<li><a href="/jblog/blog/${blogId}/blog-admin-category">카테고리</a></li>
 					<li class="selected">글작성</li>
 				</ul>
-				<form action="/jblog/blog/${blogId}/blog-admin-writing" method="post">
+				<form action="/jblog/blog/${blogId}/blog-admin-writing" method="post" id="writing">
 					<table class="admin-cat-write">
 						<tr>
 							<td class="t">제목</td>
-							<td><input type="text" size="60" name="title">
+							<td><input type="text" size="60" name="title" id="title">
 							 <select name="category">
 									<c:forEach items="${category}" var="category">
 										<option value="${category.category_no}">${category.name}</option>
@@ -36,7 +61,7 @@
 						</tr>
 						<tr>
 							<td class="t">내용</td>
-							<td><textarea name="content"></textarea></td>
+							<td><textarea name="content" id="textcontent"></textarea></td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>

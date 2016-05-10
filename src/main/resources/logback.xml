@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!-- console에 log를 찍음! -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<charset>UTF-8</charset>
+<!-- 출력 format -->
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+	</appender>
+<!-- file에 log를 찍음! -->
+	<appender name="fileAppender2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:\LogExample\logexample2.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+<!-- 출력 format -->
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+		<!-- 1MB가 되면  C:\LogExample\logexample2.%i.log.zip로 만들어라 i는 1~10까지 zip file로 back-up ; rolling이라 한다-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>C:\LogExample\logexample2.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>10KB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+	<!-- appender는 계속 만들 수 있다. file, DB, Network Appender 등-->
+	<appender name="fileAppender3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:\LogExample\logexample3.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>C:\LogExample\logexample3.%i.log.zip</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>10</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>	
+
+		<!-- 생각!!! android log같은 경우는 device에 저장하면 개발자가 못보겠지! network append하면 좋을 것이야 !!!!! -->
+
+	<!--
+		com.bit2015.logexample2 아래 패키지 로그들만 
+		C:\LogExample\logexample2.log 파일에 출력하는 로거
+
+	
+	
+	
+		com.bit2015.logexample3 아래 패키지 로그들만 
+		C:\LogExample\logexample3.log 파일에 출력하는 로거
+		append를 두개했다 -> console에도 남기고 file에도 남긴다
+	
+	
+	<logger name="com.bit2015.logexample3"  level="WARN" additivity="false">
+            <appender-ref ref="fileAppender3" />
+			<appender-ref ref="consoleAppender" />
+    </logger>    
+ -->
+	<!-- 그럼 나머지 package level은 어떡해? ㅋㅋㅋㅋㅋ -> 나머지는 루트 logger를 이용한다 -->
+	<!-- 루트(글로벌) 로거 -->
+	<root level="DEBUG">
+	<!-- <root level="WARN"> ; WARN과 ERROR만 나온다 -> DEBUG > INFO > WARN > ERROR -->
+		<appender-ref ref="consoleAppender" />
+	</root>
+	
+	<!--
+	<root level="INFO">
+		<appender-ref ref="consoleAppender" />
+		<appender-ref ref="fileAppender" />
+	</root>
+	-->
+	<!--
+		<root level="WARN">
+			<appender-ref ref="consoleAppender" />
+		</root>
+	-->
+	<!--
+		<root level="ERROR">
+			<appender-ref ref="consoleAppender" />
+		</root>
+	-->
+</configuration>

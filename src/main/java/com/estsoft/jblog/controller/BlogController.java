@@ -226,7 +226,10 @@ public class BlogController {
 		cvo.setNo(bvo.getNo());
 		cvo.setPost_count(0L);
 		categoryService.insertCate(cvo);
-
+		
+		List<CategoryVo>clist=categoryService.SearchCategory(blogId);
+		cvo = clist.get(clist.size()-1);
+		System.out.println("oooooooooo222222222222222o"+cvo.getCategory_no());
 		Map<String, Object> map = new HashMap<>();
 		map.put("data", cvo);
 		map.put("result", "success");
@@ -239,7 +242,7 @@ public class BlogController {
 	public Map<String, Object> CategoryDelete(@PathVariable("category_no") Long category_no,
 			@PathVariable("blogId") String blogId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		System.out.println("ooooooooooo");
+		System.out.println("ooooooooooo"+category_no);
 		categoryService.deleteCate(category_no);
 
 		Map<String, Object> map = new HashMap<String, Object>();

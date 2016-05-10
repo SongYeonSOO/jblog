@@ -35,7 +35,7 @@
 
 					<c:when test="${not empty onepvo}">
 							<h4>${onepvo.title}</h4>
-							<h5>${onepvo.reg_date}</h5>
+							<h5> 작성일: ${onepvo.reg_date}</h5>
 							<!-- 우측정렬필요 -->
 							<p>${onepvo.content}</p>
 					</c:when>

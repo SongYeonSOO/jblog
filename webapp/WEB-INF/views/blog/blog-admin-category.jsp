@@ -15,6 +15,7 @@
 <script type="text/javascript">
 var count=1;
 var renderHtml = function( cvo ) {
+	console.log(cvo);
 	// 대신에 js template Library를 사용한다. ex) EJS, Underscore.js
 	var html = "<tr id=tr-"+ cvo.category_no + ">" +
 					"<td>" + count + " </td>" +
@@ -31,6 +32,7 @@ var renderHtml = function( cvo ) {
 	}
 	console.log( $("#delImage-"+ cvo.category_no).attr("data-no") );
 	count ++;
+	$("#delImage-"+ cvo.category_no).css("cursor", "pointer");
 	$("#delImage-"+ cvo.category_no).click(function(){		
 		console.log("clicked");
 	$.ajax({
@@ -100,16 +102,35 @@ var fetchList = function() {
 
 	
 	$(function() {
-		fetchList();
 
-		$("#newcate").click(function(){	
+
+		$("#form-insert").submit(function(event){
+			event.preventDefault();
+			//1. 이름 유효성 체크
+			var catename = $("#catename").val();
+			var catedes = $("#catedes").val();
+
+
+			if (catename == "") {
+				alert("카테고리 이름 없다!");
+				$("#catename").val("").focus();
+				return false;
+			}
+			//2. 설명 유효성 체크
+		
+			if (catedes == "") {
+				alert("카테고리 설명 없다!");
+				$("#catedes").val("").focus();
+				return false;
+			}
+
 			$.ajax({
 				// 내가 정한 주소 p: page
 				//브라우저에서 "/mysite/guestbook?a=ajax-list&p="로 자동으로 바뀐다!!!!
 				url : "${pageContext.request.contextPath}/blog/${blogId}/blog-admin-categorying",
 				type : "post",
 				dataType : "json", //이거 안쓰면 parsing error난다! listaction이 실행되기 때문
-				data : "name=" + $("#catename").val() +"&description=" + $("#catedes").val(), //get방식이니깐 본문에 들어가는 data가 없음
+				data : "name=" + catename +"&description=" + catedes, //get방식이니깐 본문에 들어가는 data가 없음
 				success : function(response) {
 					// data: array , vo : object
 					renderHtml(response.data);
@@ -117,15 +138,13 @@ var fetchList = function() {
 				error : function(xhr, status, error) {
 					console.log(status + ":" + error);
 				}// xhr : xml http request
-
+				
 			});
-			
-			
+			this.reset();
 		});
 		//ajax ; 나중에 하자
-
 	///{blogId}/blog-admin-categorydelete/{category_no}
-	
+		fetchList();
 	
 });
 
@@ -154,7 +173,7 @@ var fetchList = function() {
 
 
 				</table>
-
+<form id="form-insert">
 					<h4 class="n-c">새로운 카테고리 추가</h4>
 					<table id="admin-cat-add">
 						<tr>
@@ -170,7 +189,7 @@ var fetchList = function() {
 							<td><input type="submit" value="카테고리 추가" id="newcate"></td>
 						</tr>
 					</table>
-
+</form>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/include/footer.jsp">
