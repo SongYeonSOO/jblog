@@ -19,4 +19,21 @@
 	UPDATE blog SET title=#{title}, logo=#{logo} WHERE id=#{id}
 	]]>
 	</update>
+	
+	
+	<select id="count" parameterType="string" resultType="long">
+	<![CDATA[
+	SELECT COUNT(no) 
+	FROM blog
+	WHERE (title like CONCAT('%',#{kwd},'%') OR id like CONCAT('%',#{kwd},'%'))
+	]]>
+	</select>
+	<select id="searchList" parameterType="map" resultType="blogvo">
+	<![CDATA[
+	SELECT b.no, b.title, b.logo, b.id
+	FROM blog b,user u 
+	WHERE b.id = u.id AND (title like CONCAT('%',#{kwd},'%') OR id like CONCAT('%',#{kwd},'%'))
+	LIMIT #{num}, 5
+	]]>
+	</select>
 </mapper>

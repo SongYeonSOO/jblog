@@ -3,6 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+	<%
+String newLine = "\r\n";
+pageContext.setAttribute(newLine, "\r\n");%>
 <!doctype html>
 <html>
 <head>
@@ -32,28 +35,35 @@
 			<div id="content">
 				<div class="blog-content">
 					<c:choose>
-					<c:when test="${not empty onepvo}">
+						<c:when test="${not empty onepvo}">
 							<h4>${onepvo.title}</h4>
-							<h5> 작성일: ${onepvo.reg_date}</h5>
-							<p>${onepvo.content}</p>
+							<h5>작성일: ${onepvo.reg_date}</h5>
+							<p>${fn:replace(onepvo.content,newLine,"<br>")}</p>
+							
 							<div id="deletediv">
-							<c:if test="${not empty authUser && authUser.id == blogId}">
-							<a href="/jblog/blog/${blogId}/post-delete/${onepvo.post_no}"><img src="${pageContext.request.contextPath}/assets/images/delete.png"></a>
-							</c:if>
+								<c:if test="${not empty authUser && authUser.id == blogId}">
+								<h5 style="display:inline; margin-top:10px; margin-right:32px">삭제:</h5>	<a href="/jblog/blog/${blogId}/post-delete/${onepvo.post_no}"><img
+									style="display:inline; vertical-align:middle; margin-right:50px"	src="${pageContext.request.contextPath}/assets/images/delete.png"></a>
+								</c:if>
 							</div>
-					</c:when>
-					<c:when test="${empty plist}">
-							<h4>내용이 없습니다</h4>											
-					</c:when>
+							
+						</c:when>
+						<c:when test="${empty plist}">
+							<h4>내용이 없습니다</h4>
+						</c:when>
 					</c:choose>
 				</div>
 
 				<ul class="blog-list">
-
+					<c:if test="${not empty plist}">
+					<div class="divline">
+					</div>
+					</c:if>
 					<c:forEach items="${plist}" var="pvo">
-						<li><a href="/jblog/blog/${blogId}/${category_no}?no=${pvo.post_no}">${pvo.title}</a>
+						<li><a
+							href="/jblog/blog/${blogId}/${category_no}?no=${pvo.post_no}">${pvo.title}</a>
 							<span>${pvo.reg_date}</span></li>
-							
+
 					</c:forEach>
 				</ul>
 			</div>
@@ -73,7 +83,7 @@
 				<!--  default가 미분류 -->
 				<c:forEach items="${category}" var="cvo">
 					<c:choose>
-					<c:when test="${cvo.category_no==category_no}">
+						<c:when test="${cvo.category_no==category_no}">
 							<li><a href="/jblog/blog/${blogId}/${cvo.category_no}"><strong>${cvo.name}</strong></a></li>
 						</c:when>
 						<c:otherwise>

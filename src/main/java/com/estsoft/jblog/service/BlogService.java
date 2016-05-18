@@ -1,6 +1,8 @@
 package com.estsoft.jblog.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +84,39 @@ public class BlogService {
 		pdao.deletePost(post_no);
 		
 	}
+
+	public Map<String, Object> SearchList(String kwd, Long page) {
+		
+		//page에 이용!!!
+		 int COUNT_LIST = 5;
+		 int COUNT_PAGE = 5;
+		Long currentpage = page;
+		Long beginpage = currentpage - ((currentpage-1)%COUNT_PAGE);
+		Long totalpage = (long) Math.ceil(bdao.Count(kwd)/(float)COUNT_PAGE);
+		Long maxpage = null;
+		if(totalpage>=beginpage+COUNT_PAGE-1){
+			maxpage = beginpage+COUNT_PAGE-1;
+		}else{
+			maxpage = totalpage;
+		}
+		
+		Long blognum = bdao.Count(kwd)-(currentpage-1)*COUNT_PAGE;
+		System.out.println("1231231231" + blognum);
+		
+		Map<String, Long> pageinfo = new HashMap<String, Long>();
+		pageinfo.put("beginpage", beginpage);
+		pageinfo.put("totalpage", totalpage);
+		pageinfo.put("maxpage", maxpage);
+		pageinfo.put("currentpage", currentpage);		
+		
+		List<BlogVo> list = bdao.SearchList(kwd, page);;
+		
+	
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("pageinfo", pageinfo);
+		map.put("blognum", blognum);
+		map.put("list", list);
+		return map;
+		}
 
 }

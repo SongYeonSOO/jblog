@@ -1,5 +1,9 @@
 package com.estsoft.jblog.dao;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSession;
@@ -42,5 +46,19 @@ public class BlogDao {
 
 		sqlSession.update("blog.updateblog", bvo);
 	}
+
+	public List<BlogVo> SearchList(String kwd, Long page) {
+		
+		 Map<String, Object> map = new HashMap<>();
+		 map.put("kwd", kwd);
+		 map.put("page", page);
+		List<BlogVo> blist= sqlSession.selectList("blog.searchList", map);
+		return blist;
+	}
+
+	public Long Count(String kwd) {
+			Long count = sqlSession.selectOne("blog.count", kwd);
+			return count;
+		}
 
 }

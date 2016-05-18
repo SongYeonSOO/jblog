@@ -28,27 +28,54 @@
 		</c:import>
 		<form class="search-form">
 			<fieldset>
-				<input type="text" name="keyword" value="검색기능은 안됩니다." /> 
-				<input type="submit" value="검색" />
+				<input type="text" name="kwd" value="검색기능은 안됩니다." /> <input
+					type="submit" value="검색" />
 			</fieldset>
 			<fieldset>
-				<input type="radio" name="which" value="blog-title"> <label>블로그
+				<input type="radio" name="title" value="blog-title"> <label>블로그
 					제목</label> <input type="radio" name="which" value="tag"> <label>태그</label>
-				<input type="radio" name="which" value="blog-user"> <label>블로거</label>
+				<input type="radio" name="id" value="blog-user"> <label>블로거</label>
 
 
 				<!-- 블로그  출력 -->
 				<table>
-					<c:forEach items="${list}" var="vo" varStatus="status">
+					<c:forEach items="${blist}" var="bvo" varStatus="status">
 						<tr>
-							<td>${requestScope.boardno-status.index}</td>
+							<td>${requestScope.no-status.index}</td>
 							<td style="text-align: left; padding-left: 0px"><a
-								href="/jblog/blog/blog-main?no=${vo.no}">${vo.title}</a></td>
-							<td>${vo.id}</td>
+								href="/jblog/blog/${bvo.no}">${bvo.title}</a></td>
+							<td>${bvo.id}</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</fieldset>
+			<div class="pager">
+				<ul>
+
+					<c:if test="${pageinfo.currentpage > 5}">
+						<li><a
+							href="/jblog/main?page=${pageinfo.beginpage-1}&kwd=${kwd}">◀</a></li>
+					</c:if>
+					<c:forEach begin="${pageinfo.beginpage}" end="${pageinfo.maxpage}"
+						var="viewpage">
+						<c:choose>
+							<c:when test="${viewpage==pageinfo.currentpage}">
+								<li class="selected"><a
+									href="/jblog/main?page=${viewpage}&kwd=${kwd}">${viewpage}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/jblog/main?page=${viewpage}&kwd=${kwd}">${viewpage}</a></li>
+							</c:otherwise>
+						</c:choose>
+
+					</c:forEach>
+					<c:if test="${pageinfo.totalpage != pageinfo.maxpage}">
+						<li><a
+							href="/jblog/main?page=${pageinfo.maxpage+1}&kwd=${kwd}">▶</a></li>
+					</c:if>
+
+				</ul>
+			</div>
 		</form>
 	</div>
 </body>
